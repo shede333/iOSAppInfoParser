@@ -15,7 +15,7 @@ print("{} - {}".format("*" * 10, find_packages()))
 
 setup(
     name='iOSAppInfoParser',  # 包名字
-    version='1.0',  # 包版本
+    version='1.0.1',  # 包版本
     author='shede333',  # 作者
     author_email='333wshw@163.com',  # 作者邮箱
     keywords='ios app info.plist infoPlist info parser',
