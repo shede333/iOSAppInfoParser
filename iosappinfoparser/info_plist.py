@@ -40,7 +40,11 @@ class InfoPlistModel(object):
 
     # def _run_command(self, sub_command):
     #     command = '/usr/libexec/PlistBuddy -c "{}" "{}"'.format(sub_command, self.file_path)
-    #     output = subprocess.check_output(command, shell=True, text=True)
+    #     try:
+    #         output = subprocess.check_output(command, shell=True, text=True)
+    #     except subprocess.CalledProcessError:
+    #         output = None
+    #
     #     return output and output.strip()
 
     def save_to_local(self):
@@ -87,6 +91,14 @@ class InfoPlistModel(object):
     @app_display_name.setter
     def app_display_name(self, value):
         self.set_value("CFBundleDisplayName", value)
+
+    @property
+    def bundle_name(self) -> str:
+        return self.get_value("CFBundleName")
+
+    @bundle_name.setter
+    def bundle_name(self, value):
+        self.set_value("CFBundleName", value)
 
     @property
     def app_version(self) -> str:

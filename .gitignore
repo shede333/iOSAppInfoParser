@@ -118,3 +118,4 @@ venv.bak/
 
 # add by sw
 /test.py
+/test-resource
