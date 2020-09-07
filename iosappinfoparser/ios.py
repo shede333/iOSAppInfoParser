@@ -3,6 +3,7 @@
 """
 __author__ = 'shede333'
 
+解析iOS-App包相关信息
 文档: https://developer.apple.com/library/archive/qa/qa1686/_index.html
 """
 
@@ -22,6 +23,21 @@ from typing import Dict
 #         return getattr(self, attr)
 #
 #     return _lazy_property
+
+
+class IPAInfoModel:
+    """.ipa文件相关信息"""
+
+    def __init__(self):
+        pass
+
+
+class AppInfoModel:
+    """.app文件相关信息"""
+
+    def __init__(self):
+        pass
+
 
 class InfoPlistModel(object):
     """.App文件里的 Info.plist信息model"""

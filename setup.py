@@ -24,7 +24,7 @@ setup(
     long_description_content_type='text/markdown',
     url='https://github.com/shede333/iOSAppInfoParser',  # 包的主页
     packages=find_packages(),  # 包
-    install_requires=['Pillow~=7.1'],
+    install_requires=['Pillow~=7.1', 'SWRunShell~=1.1'],
     python_requires="~=3.6",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
