@@ -15,7 +15,7 @@ print("{} - {}".format("*" * 10, find_packages()))
 
 setup(
     name='iOSAppInfoParser',  # 包名字
-    version='1.0.1',  # 包版本
+    version='1.0.2',  # 包版本
     author='shede333',  # 作者
     author_email='333wshw@163.com',  # 作者邮箱
     keywords='ios app info.plist infoPlist info parser',
@@ -24,7 +24,7 @@ setup(
     long_description_content_type='text/markdown',
     url='https://github.com/shede333/iOSAppInfoParser',  # 包的主页
     packages=find_packages(),  # 包
-    install_requires=['Pillow~=7.1'],
+    install_requires=['Pillow~=8.1'],
     python_requires="~=3.6",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
