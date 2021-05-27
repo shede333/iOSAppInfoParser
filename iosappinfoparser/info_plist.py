@@ -10,6 +10,7 @@ import plistlib
 from pathlib import Path
 from typing import List
 from typing import Dict
+import os
 
 
 # def lazy_property(fn):
@@ -163,3 +164,16 @@ def optimal_app_icon(path_list: List[Path]) -> Path:
             return icon_dict[tmp_size]
 
     return icon_dict.get(max_width)
+
+
+def find_proj_info_plist(project_path: str) -> Path:
+    """
+    查找iOS项目里的'Info.plist'文件路径
+    :param project_path: iOS项目的根目录
+    :return: 'Info.plist'文件路径
+    """
+    project_path = Path(project_path)
+    for tmp_path in project_path.iterdir():
+        tmp_info_path = tmp_path.joinpath('Info.plist')
+        if tmp_info_path.is_file() and tmp_path.joinpath('main.m').is_file():
+            return tmp_info_path
