@@ -7,10 +7,10 @@ __author__ = 'shede333'
 """
 
 import plistlib
+import subprocess
 from pathlib import Path
-from typing import List
 from typing import Dict
-import os
+from typing import List
 
 
 # def lazy_property(fn):
@@ -177,3 +177,36 @@ def find_proj_info_plist(project_path: str) -> Path:
         tmp_info_path = tmp_path.joinpath('Info.plist')
         if tmp_info_path.is_file() and tmp_path.joinpath('main.m').is_file():
             return tmp_info_path
+
+
+def change_app_display_name(app_path, display_name, lang_key=None):
+    """
+    修改App的display_name，包括Info.plist文件和国际化文件里的值
+    :param app_path: .app文件路径
+    :param display_name: 新名字
+    :param lang_key: InfoPlist.strings的国际化语言key，默认None代表所有语言
+    :return:
+    """
+    app_path = Path(app_path)
+    name_key = 'CFBundleDisplayName'
+
+    # 修改Info.plist文件里的display_name
+    info_model = InfoPlistModel(app_path.joinpath("Info.plist"))
+    info_model.set_value(name_key, display_name)
+    print(info_model.app_version)  # 获取App的版本信息
+    info_model.app_version = "1.23"  # 修改App的版本信息
+    print(f'修改文件：{info_model.file_path}')
+
+    # 修改Info.plist的国际化
+    lang_key = lang_key.lower() if lang_key else None
+    for file_path in app_path.glob('*.lproj/InfoPlist.strings'):
+        if lang_key and (lang_key != file_path.stem.lower()):
+            continue
+
+        command = f'plutil -p "{file_path}"'
+        result = subprocess.run(command, text=True, shell=True, capture_output=True)
+        if name_key not in result.stdout:
+            continue
+        command = f'plutil -replace {name_key} -string "{display_name}" {file_path}'
+        subprocess.run(command, text=True, shell=True, check=True)
+        print(f'修改strings文件：{file_path}')
