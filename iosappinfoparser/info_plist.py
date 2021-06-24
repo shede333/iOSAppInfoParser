@@ -193,9 +193,7 @@ def change_app_display_name(app_path, display_name, lang_key=None):
     # 修改Info.plist文件里的display_name
     info_model = InfoPlistModel(app_path.joinpath("Info.plist"))
     info_model.set_value(name_key, display_name)
-    print(info_model.app_version)  # 获取App的版本信息
-    info_model.app_version = "1.23"  # 修改App的版本信息
-    print(f'修改文件：{info_model.file_path}')
+    print(f'修改文件（{info_model.file_path}），{name_key}字段为：{display_name}')
 
     # 修改Info.plist的国际化
     lang_key = lang_key.lower() if lang_key else None
